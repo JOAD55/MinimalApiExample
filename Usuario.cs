@@ -9,3 +9,10 @@ public class Usuario(string nombre, string contrasena, DateTime cumpleanios)
     public string Contrasena { get; set; } = contrasena;
     public DateTime Cumpleanios { get; set; } = cumpleanios;
 }
+
+public class UpdateUsuarioDto
+{
+    public string? Nombre { get; set; }
+    public string? Contrasena { get; set; }
+    public DateTime? Cumpleanios { get; set; }
+}

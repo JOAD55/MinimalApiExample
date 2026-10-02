@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using MinimalApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,22 @@ app.MapDelete(
 
         users.Remove(user);
         return Results.NoContent();
+    }
+);
+
+app.MapPatch(
+    "/users/{id}",
+    (int id, UpdateUsuarioDto dto) =>
+    {
+        var user = users.FirstOrDefault(u => u.Id == id);
+        if (user is null)
+            return Results.NotFound();
+
+        if (dto.Nombre is not null) user.Nombre = dto.Nombre;
+        if (dto.Contrasena is not null) user.Contrasena = dto.Contrasena;
+        if (dto.Cumpleanios is not null) user.Cumpleanios = (DateTime)dto.Cumpleanios;
+
+        return Results.Ok(user);
     }
 );
 
